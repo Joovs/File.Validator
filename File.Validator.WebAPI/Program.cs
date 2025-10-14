@@ -1,8 +1,12 @@
+using File.Validator.Presentation.Modules;
+using File.Validator.Application;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplication();
 
 var app = builder.Build();
 
@@ -15,6 +19,8 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer API V1");
     });
 }
+
+ModulesConfiguration.Configure(app);
 
 app.UseHttpsRedirection();
 
