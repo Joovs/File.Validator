@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\File.Validator.Application\File.Validator.Application.csproj" />
     <ProjectReference Include="..\File.Validator.Infrastructure\File.Validator.Infrastructure.csproj" />
+    <ProjectReference Include="..\File.Validator.Presentation\File.Validator.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
