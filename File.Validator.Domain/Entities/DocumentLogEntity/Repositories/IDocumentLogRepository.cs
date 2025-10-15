@@ -1,8 +1,8 @@
-﻿using File.Validator.Domain.Entities.DocumentEntity.Models.DocumentLog;
+﻿using File.Validator.Domain.Entities.DocumentLogEntity.Models;
 
-namespace File.Validator.Domain.Entities.DocumentEntity.Repositories;
+namespace File.Validator.Domain.Entities.DocumentLogEntity.Repositories;
 
-public interface IDocumnetLogRepository
+public interface IDocumentLogRepository
 {
     Task<DocumentLogModel> RegisterLog(DocumentLogRequestModel request, CancellationToken cancellationToken);
 }

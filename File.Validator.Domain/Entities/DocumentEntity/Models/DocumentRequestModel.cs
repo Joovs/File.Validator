@@ -1,4 +1,4 @@
-﻿namespace File.Validator.Domain.Entities.DocumentEntity.Models.Document;
+﻿namespace File.Validator.Domain.Entities.DocumentEntity.Models;
 
 public class DocumentRequestModel
 {

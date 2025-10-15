@@ -1,4 +1,4 @@
-﻿namespace File.Validator.Domain.Entities.DocumentEntity.Models.DocumentLog;
+﻿namespace File.Validator.Domain.Entities.DocumentLogEntity.Models;
 
 public class DocumentLogRequestModel
 {
