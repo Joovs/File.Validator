@@ -63,7 +63,7 @@ public class ValidateFileCommandHandler : IRequestHandler<ValidateFileCommand, R
             }
             catch (Exception ex)
             {
-                return Result<ValidateFileCommandResponse>.Failure(500, "InternalServerError", ex.Message);
+                return Result<ValidateFileCommandResponse>.Failure(500, "DataBaseServerError", ex.Message);
             }
             return Result<ValidateFileCommandResponse>.Failure(400, "InsecureFile", "The uploaded file contains a virus or is corrupted");
         }
@@ -102,7 +102,7 @@ public class ValidateFileCommandHandler : IRequestHandler<ValidateFileCommand, R
         }
         catch (Exception ex)
         {
-            return Result<ValidateFileCommandResponse>.Failure(500, "DataBaseError", ex.Message);
+            return Result<ValidateFileCommandResponse>.Failure(500, "DataBaseServerError", ex.Message);
         }
 
         ValidateFileCommandResponse newDocument = new ValidateFileCommandResponse{
