@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 
-namespace File.Validator.Domain.Services.FileSaver
+namespace File.Validator.Domain.Services.FileSaver;
+
+public interface IFileSaver
 {
-    internal interface IFileSaver
-    {
-    }
+    Task<string> SaveFileAsync(IFormFile file);
 }
