@@ -28,11 +28,15 @@ public class ValidateFileCommandHandler : IRequestHandler<ValidateFileCommand, R
     public async Task<Result<ValidateFileCommandResponse>> Handle(ValidateFileCommand request, CancellationToken cancellationToken)
     {
         if(request == null ||
-           int.IsNegative(request.request.UserID) ||
-           request.request.File == null ||
            request.request.File.Length == 0)
         {
             return Result<ValidateFileCommandResponse>.Failure(400, "IncompleteData", "All fields are required");
+        }
+
+        if(int.IsNegative(request.request.UserID) ||
+            request.request.UserID == 0)
+        {
+            return Result<ValidateFileCommandResponse>.Failure(400, "BadRequest", "UserId must be grather than cero");
         }
 
         bool fileIsSafe;

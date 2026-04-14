@@ -14,15 +14,22 @@ public static class DocumentModules
     {
         var customerGroup = app.MapGroup(BASE_URL);
 
-        customerGroup.MapPost("", ValidateFile);
+        customerGroup.MapPost("", ValidateFile)
+            .DisableAntiforgery();
     }
 
     private static async Task<IResult> ValidateFile(
-        [FromForm] ValidateFileCommandRequest request,
+        [FromForm] int userId,
+        IFormFile file,
         ISender sender,
         CancellationToken cancellationToken)
     {
-        var command = new ValidateFileCommand(request);
+        ValidateFileCommandRequest request = new ValidateFileCommandRequest
+        {
+            UserID = userId,
+            File = file,
+        };
+        ValidateFileCommand command = new ValidateFileCommand(request);
         var result = await sender.Send(command, cancellationToken);
 
         if (!result.IsSuccess)

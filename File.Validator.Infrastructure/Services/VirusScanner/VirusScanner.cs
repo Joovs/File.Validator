@@ -23,25 +23,24 @@ public class VirusScanner : IVirusScanner
     {
         try
         {
-            // para que los recursos descartables se eliminen correctamente
-            using (MemoryStream ms = new MemoryStream())
+            MemoryStream ms = new MemoryStream();
+            
+            await file.CopyToAsync(ms);
+            ms.Position = 0;
+
+            var scanResult = await _virusTotal.ScanFileAsync(ms, file.FileName);
+            if (scanResult == null || string.IsNullOrEmpty(scanResult.Resource)) return false;
+
+            var report = await _virusTotal.GetFileReportAsync(scanResult.Resource);
+            if (report == null) return false;
+
+            if (report.ResponseCode.ToString().Equals("Present", StringComparison.OrdinalIgnoreCase) || report.ResponseCode.ToString() == "1")
             {
-                await file.CopyToAsync(ms);
-                ms.Position = 0;
-
-                var scanResult = await _virusTotal.ScanFileAsync(ms, file.FileName);
-                if (scanResult == null || string.IsNullOrEmpty(scanResult.Resource)) return false;
-
-                var report = await _virusTotal.GetFileReportAsync(scanResult.Resource);
-                if (report == null) return false;
-
-                if (report.ResponseCode.ToString().Equals("Present", StringComparison.OrdinalIgnoreCase) || report.ResponseCode.ToString() == "1")
-                {
-                    return report.Positives == 0;
-                }
-
-                return false;
+                return report.Positives == 0;
             }
+
+            return false;
+           
         }
         catch (Exception ex)
         { 
